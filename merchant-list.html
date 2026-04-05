@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PrintLink - 商家列表页</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC","Hiragino Sans GB", "Microsoft YaHei", sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.5; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .header { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.95); backdrop-filter: blur(10px); border-bottom: 1px solid #e2e8f0; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-badge { width: 42px; height: 42px; border-radius: 16px; background: #0f172a; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+    .brand-title { font-size: 18px; font-weight: 700; }
+    .brand-sub { font-size: 12px; color: #64748b; }
+    .nav { display: flex; gap: 28px; color: #475569; font-size: 14px; }
+    .actions { display: flex; gap: 12px; }
+    .btn { border: 1px solid #cbd5e1; background: white; color: #0f172a; border-radius: 14px; padding: 10px 16px; font-size: 14px; cursor: pointer; }
+    .btn-dark { background: #0f172a; color: white; border-color: #0f172a; }
+    .hero { background: white; border-bottom: 1px solid #e2e8f0; }
+    .hero-inner { padding: 36px 0 28px; }
+    .crumbs { color: #64748b; font-size: 14px; margin-bottom: 10px; }
+    h1 { margin: 0; font-size: 34px; }
+    .sub { color: #64748b; margin-top: 8px; }
+    .search-row { display: grid; grid-template-columns: 2fr 1fr 1fr auto; gap: 14px; margin-top: 24px; }
+    .field, select { width: 100%; padding: 14px 16px; border-radius: 16px; border: 1px solid #e2e8f0; background: white; font-size: 15px; color: #0f172a; }
+    main { padding: 28px 0 60px; }
+    .layout { display: grid; grid-template-columns: 300px 1fr; gap: 24px; align-items: start; }
+    .panel { background: white; border: 1px solid #e2e8f0; border-radius: 28px; padding: 22px; box-shadow: 0 8px 24px rgba(15,23,42,.04); }
+    .panel h3 { margin: 0 0 18px; font-size: 20px; }
+    .filter-group { margin-bottom: 22px; }
+    .filter-title { font-size: 14px; font-weight: 700; margin-bottom: 12px; color: #334155; }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip { padding: 8px 12px; border-radius: 999px; border: 1px solid #e2e8f0; background: #fff; font-size: 13px; color: #475569; }
+    .chip.active { background: #0f172a; color: white; border-color: #0f172a; }
+    .range { display: grid; grid-template-columns: 1fr auto 1fr; gap: 10px; align-items: center; }
+    .list-top { display: flex; justify-content: space-between; gap: 16px; align-items: center; margin-bottom: 18px; }
+    .result-count { color: #64748b; font-size: 14px; }
+    .sorts { display: flex; gap: 10px; flex-wrap: wrap; }
+    .sort { padding: 10px 14px; border-radius: 999px; background: white; border: 1px solid #e2e8f0; font-size: 13px; color: #475569; }
+    .sort.active { background: #eff6ff; border-color: #bfdbfe; color: #1d4ed8; }
+    .maker-list { display: grid; gap: 18px; }
+    .maker-card { background: white; border: 1px solid #e2e8f0; border-radius: 30px; padding: 24px; display: grid; grid-template-columns: 1.2fr .8fr; gap: 20px; box-shadow: 0 10px 28px rgba(15,23,42,.04); }
+    .maker-head { display: flex; justify-content: space-between; gap: 14px; align-items: start; }
+    .avatar { width: 56px; height: 56px; border-radius: 20px; background: #e2e8f0; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #334155; }
+    .maker-main { display: flex; gap: 14px; }
+    .maker-name { font-size: 22px; font-weight: 700; }
+    .maker-city { color: #64748b; margin-top: 4px; }
+    .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+    .tag { background: #f1f5f9; color: #475569; border-radius: 999px; padding: 6px 10px; font-size: 12px; }
+    .desc { margin-top: 16px; color: #475569; font-size: 14px; max-width: 680px; }
+    .mini-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-top: 18px; }
+    .mini-box { border: 1px solid #e2e8f0; border-radius: 18px; padding: 14px; background: #fafafa; }
+    .mini-label { font-size: 12px; color: #64748b; }
+    .mini-value { font-size: 15px; font-weight: 700; margin-top: 6px; }
+    .side-card { border: 1px solid #e2e8f0; border-radius: 24px; padding: 18px; background: #fcfcfd; height: fit-content; }
+    .score { display: flex; align-items: end; gap: 10px; margin-bottom: 16px; }
+    .score strong { font-size: 32px; line-height: 1; }
+    .muted { color: #64748b; }
+    .side-list { display: grid; gap: 10px; margin-bottom: 16px; }
+    .side-row { display: flex; justify-content: space-between; font-size: 14px; padding-bottom: 10px; border-bottom: 1px dashed #e2e8f0; }
+    .side-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .actions-row { display: grid; gap: 10px; }
+    .btn-full { width: 100%; }
+    .empty { background: white; border: 1px dashed #cbd5e1; border-radius: 28px; padding: 40px; text-align: center; color: #64748b; margin-top: 18px; }
+    .footer-note { margin-top: 20px; padding: 16px 18px; background: #eff6ff; color: #1e3a8a; border: 1px solid #bfdbfe; border-radius: 20px; font-size: 14px; }
+    @media (max-width: 1080px) { .nav { display: none; } .search-row { grid-template-columns: 1fr; } .layout { grid-template-columns: 1fr; } .maker-card { grid-template-columns: 1fr; } .mini-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 680px) { h1 { font-size: 28px; } .mini-grid { grid-template-columns: 1fr; } .actions { display:none; } }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-badge">3D</div>
+        <div>
+          <div class="brand-title">PrintLink</div>
+          <div class="brand-sub">3D打印共享平台</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#">首页</a>
+        <a href="#">找商家</a>
+        <a href="#">发布需求</a>
+        <a href="#">商家入驻</a>
+      </nav>
+      <div class="actions">
+        <button class="btn">登录</button>
+        <button class="btn btn-dark">注册</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="crumbs">首页 / 找商家</div>
+      <h1>发现适合你的 3D 打印服务商</h1>
+      <div class="sub">按城市、材料、打印机类型、价格区间快速筛选，找到本地或异地的合适商家。</div>
+      <div class="search-row">
+        <input class="field" placeholder="搜索城市 / 商家名称 / 手办 / 树脂 / 零件" />
+        <select><option>全部打印类型</option><option>FDM</option><option>SLA</option><option>SLS</option></select>
+        <select><option>全部材料</option><option>PLA</option><option>ABS</option><option>PETG</option><option>树脂 Resin</option></select>
+        <button class="btn btn-dark">搜索</button>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="container layout">
+      <aside class="panel">
+        <h3>筛选条件</h3>
+        <div class="filter-group">
+          <div class="filter-title">城市</div>
+          <div class="chips">
+            <div class="chip active">全部</div><div class="chip">深圳</div><div class="chip">广州</div><div class="chip">上海</div><div class="chip">北京</div><div class="chip">杭州</div>
+          </div>
+        </div>
+        <div class="filter-group">
+          <div class="filter-title">打印机类型</div>
+          <div class="chips">
+            <div class="chip active">不限</div><div class="chip">FDM</div><div class="chip">SLA</div><div class="chip">SLS</div>
+          </div>
+        </div>
+        <div class="filter-group">
+          <div class="filter-title">材料</div>
+          <div class="chips">
+            <div class="chip active">不限</div><div class="chip">PLA</div><div class="chip">ABS</div><div class="chip">PETG</div><div class="chip">Resin</div><div class="chip">TPU</div>
+          </div>
+        </div>
+        <div class="filter-group">
+          <div class="filter-title">价格区间</div>
+          <div class="range">
+            <input class="field" placeholder="最低价" />
+            <span class="muted">—</span>
+            <input class="field" placeholder="最高价" />
+          </div>
+        </div>
+        <div class="filter-group">
+          <div class="filter-title">服务能力</div>
+          <div class="chips">
+            <div class="chip">支持自提</div><div class="chip">支持邮寄</div><div class="chip">支持加急</div><div class="chip">可上色处理</div><div class="chip">认证商家</div>
+          </div>
+        </div>
+        <button class="btn btn-dark btn-full">应用筛选</button>
+        <button class="btn btn-full" style="margin-top:10px;">重置条件</button>
+        <div class="footer-note">小建议：第一版平台优先突出“认证商家”“本地自提”“真实案例”，这三项最容易建立信任。</div>
+      </aside>
+
+      <section>
+        <div class="list-top">
+          <div class="result-count">共找到 <strong>24</strong> 位可提供打印服务的商家</div>
+          <div class="sorts">
+            <div class="sort active">综合排序</div><div class="sort">评分优先</div><div class="sort">价格优先</div><div class="sort">距离优先</div><div class="sort">最新入驻</div>
+          </div>
+        </div>
+
+        <div class="maker-list">
+          <article class="maker-card">
+            <div>
+              <div class="maker-head">
+                <div class="maker-main">
+                  <div class="avatar">LL</div>
+                  <div>
+                    <div class="maker-name">Layer Lab</div>
+                    <div class="maker-city">深圳 · 支持自提 / 邮寄</div>
+                    <div class="tags">
+                      <span class="tag">认证商家</span><span class="tag">FDM / SLA</span><span class="tag">PLA / ABS / Resin</span><span class="tag">支持加急</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="desc">擅长工业样件、结构验证件和中小型手办打印，支持基础打磨与喷涂处理。适合设计打样、学校教学模型以及个性定制订单。</div>
+              <div class="mini-grid">
+                <div class="mini-box"><div class="mini-label">最大尺寸</div><div class="mini-value">256 × 256 × 256 mm</div></div>
+                <div class="mini-box"><div class="mini-label">层高精度</div><div class="mini-value">0.05–0.2 mm</div></div>
+                <div class="mini-box"><div class="mini-label">完成订单</div><div class="mini-value">126 单</div></div>
+                <div class="mini-box"><div class="mini-label">平均交付</div><div class="mini-value">2.3 天</div></div>
+              </div>
+            </div>
+            <div class="side-card">
+              <div class="score"><strong>4.9</strong><div class="muted">近 30 天好评稳定<br>用户复购率高</div></div>
+              <div class="side-list">
+                <div class="side-row"><span>起印价格</span><strong>¥25 起</strong></div>
+                <div class="side-row"><span>准时率</span><strong>98%</strong></div>
+                <div class="side-row"><span>回复率</span><strong>96%</strong></div>
+                <div class="side-row"><span>最近接单</span><strong>2 小时前</strong></div>
+              </div>
+              <div class="actions-row">
+                <button class="btn btn-dark btn-full">查看详情</button>
+                <button class="btn btn-full">立即询价</button>
+                <button class="btn btn-full">收藏商家</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="maker-card">
+            <div>
+              <div class="maker-head">
+                <div class="maker-main">
+                  <div class="avatar">PN</div>
+                  <div>
+                    <div class="maker-name">Print Neighbor</div>
+                    <div class="maker-city">广州 · 支持邮寄</div>
+                    <div class="tags">
+                      <span class="tag">认证商家</span><span class="tag">FDM</span><span class="tag">PLA / PETG / TPU</span><span class="tag">DIY零件友好</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="desc">更适合打印外壳件、DIY 配件、家居替换件和功能小部件，价格友好，擅长常规批量小订单。适合对成本和效率比较敏感的用户。</div>
+              <div class="mini-grid">
+                <div class="mini-box"><div class="mini-label">最大尺寸</div><div class="mini-value">300 × 300 × 400 mm</div></div>
+                <div class="mini-box"><div class="mini-label">层高精度</div><div class="mini-value">0.1–0.28 mm</div></div>
+                <div class="mini-box"><div class="mini-label">完成订单</div><div class="mini-value">89 单</div></div>
+                <div class="mini-box"><div class="mini-label">平均交付</div><div class="mini-value">1.8 天</div></div>
+              </div>
+            </div>
+            <div class="side-card">
+              <div class="score"><strong>4.8</strong><div class="muted">价格更友好<br>适合功能件打印</div></div>
+              <div class="side-list">
+                <div class="side-row"><span>起印价格</span><strong>¥18 起</strong></div>
+                <div class="side-row"><span>准时率</span><strong>95%</strong></div>
+                <div class="side-row"><span>回复率</span><strong>93%</strong></div>
+                <div class="side-row"><span>最近接单</span><strong>今天</strong></div>
+              </div>
+              <div class="actions-row">
+                <button class="btn btn-dark btn-full">查看详情</button>
+                <button class="btn btn-full">立即询价</button>
+                <button class="btn btn-full">收藏商家</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="maker-card">
+            <div>
+              <div class="maker-head">
+                <div class="maker-main">
+                  <div class="avatar">MH</div>
+                  <div>
+                    <div class="maker-name">Maker House</div>
+                    <div class="maker-city">上海 · 支持邮寄 / 树脂类订单优先</div>
+                    <div class="tags">
+                      <span class="tag">认证商家</span><span class="tag">SLA</span><span class="tag">Resin / Tough Resin</span><span class="tag">手办模型友好</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="desc">擅长高精度树脂打印、人物手办、珠宝小样和精细模型件，表面细节表现更好，适合对纹理和精细度要求较高的订单。</div>
+              <div class="mini-grid">
+                <div class="mini-box"><div class="mini-label">最大尺寸</div><div class="mini-value">218 × 123 × 235 mm</div></div>
+                <div class="mini-box"><div class="mini-label">层高精度</div><div class="mini-value">0.03–0.1 mm</div></div>
+                <div class="mini-box"><div class="mini-label">完成订单</div><div class="mini-value">142 单</div></div>
+                <div class="mini-box"><div class="mini-label">平均交付</div><div class="mini-value">2.7 天</div></div>
+              </div>
+            </div>
+            <div class="side-card">
+              <div class="score"><strong>4.7</strong><div class="muted">高精度树脂方向<br>更适合精细模型</div></div>
+              <div class="side-list">
+                <div class="side-row"><span>起印价格</span><strong>¥35 起</strong></div>
+                <div class="side-row"><span>准时率</span><strong>97%</strong></div>
+                <div class="side-row"><span>回复率</span><strong>91%</strong></div>
+                <div class="side-row"><span>最近接单</span><strong>昨天</strong></div>
+              </div>
+              <div class="actions-row">
+                <button class="btn btn-dark btn-full">查看详情</button>
+                <button class="btn btn-full">立即询价</button>
+                <button class="btn btn-full">收藏商家</button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="empty">
+          <div style="font-size:20px;font-weight:700;color:#334155;">没有找到完全匹配的商家？</div>
+          <div style="margin-top:10px;">你可以放宽城市或材料条件，或者直接发布打印需求，让商家主动来报价。</div>
+          <div style="margin-top:18px;"><button class="btn btn-dark">发布打印需求</button></div>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

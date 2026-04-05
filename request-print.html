@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WriterBoom - 提交打印需求</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC","Hiragino Sans GB","Microsoft YaHei", sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.5; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .header { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.95); backdrop-filter: blur(10px); border-bottom: 1px solid #e2e8f0; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-badge { width: 42px; height: 42px; border-radius: 16px; background: #0f172a; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+    .brand-title { font-size: 18px; font-weight: 700; }
+    .brand-sub { font-size: 12px; color: #64748b; }
+    .nav { display: flex; gap: 28px; color: #475569; font-size: 14px; }
+    .actions { display: flex; gap: 12px; }
+    .btn { border: 1px solid #cbd5e1; background: white; color: #0f172a; border-radius: 14px; padding: 10px 16px; font-size: 14px; cursor: pointer; }
+    .btn-dark { background: #0f172a; color: white; border-color: #0f172a; }
+    .hero { background: white; border-bottom: 1px solid #e2e8f0; }
+    .hero-inner { padding: 28px 0 32px; }
+    .crumbs { color: #64748b; font-size: 14px; margin-bottom: 12px; }
+    h1 { margin: 0; font-size: 34px; }
+    .sub { color: #64748b; margin-top: 8px; max-width: 800px; }
+    main { padding: 28px 0 64px; }
+    .layout { display: grid; grid-template-columns: 1fr 360px; gap: 24px; align-items: start; }
+    .card { background: white; border: 1px solid #e2e8f0; border-radius: 30px; padding: 26px; box-shadow: 0 8px 24px rgba(15,23,42,.04); }
+    .card h2 { margin: 0 0 18px; font-size: 26px; }
+    .field, select, textarea {
+      width: 100%; padding: 14px 16px; border-radius: 16px; border: 1px solid #e2e8f0;
+      background: white; font-size: 14px; color: #0f172a; margin-bottom: 14px; font-family: inherit;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .upload-box {
+      border: 2px dashed #cbd5e1; border-radius: 22px; padding: 26px; text-align: center;
+      background: #fafafa; color: #64748b; margin-bottom: 18px;
+    }
+    .upload-box strong { display: block; color: #0f172a; font-size: 18px; margin-bottom: 8px; }
+    .small { font-size: 13px; color: #64748b; }
+    .tip-list { display: grid; gap: 12px; }
+    .tip {
+      border: 1px solid #e2e8f0; border-radius: 20px; padding: 16px; background: #fcfcfd;
+    }
+    .tip-title { font-weight: 700; margin-bottom: 6px; }
+    .notice {
+      margin-top: 8px; padding: 14px 16px; border-radius: 18px;
+      background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; font-size: 14px;
+    }
+    .summary-card { position: sticky; top: 92px; display: grid; gap: 18px; }
+    .summary-box { background: #fcfcfd; border: 1px solid #e2e8f0; border-radius: 26px; padding: 20px; }
+    .summary-title { font-size: 22px; font-weight: 700; margin-bottom: 14px; }
+    .summary-row {
+      display: flex; justify-content: space-between; gap: 12px; font-size: 14px;
+      padding: 10px 0; border-bottom: 1px dashed #e2e8f0;
+    }
+    .summary-row:last-child { border-bottom: none; }
+    .dark-tip { background: #0f172a; color: white; border-radius: 28px; padding: 20px; }
+    .dark-tip h3 { margin: 0 0 10px; font-size: 18px; }
+    .dark-tip p { margin: 0 0 8px; color: rgba(255,255,255,.72); font-size: 14px; }
+    @media (max-width: 980px) {
+      .nav { display: none; }
+      .layout { grid-template-columns: 1fr; }
+      .summary-card { position: static; }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      h1 { font-size: 28px; }
+      .actions { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-badge">WB</div>
+        <div>
+          <div class="brand-title">WriterBoom</div>
+          <div class="brand-sub">3D打印共享平台</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#">首页</a>
+        <a href="#">找商家</a>
+        <a href="#">发布需求</a>
+        <a href="#">商家入驻</a>
+      </nav>
+      <div class="actions">
+        <button class="btn">登录</button>
+        <button class="btn btn-dark">注册</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="crumbs">首页 / 发布需求</div>
+      <h1>提交你的 3D 打印需求</h1>
+      <div class="sub">上传模型文件或填写打印需求，让本地或异地的商家根据材料、数量、精度和交期为你报价。</div>
+    </div>
+  </section>
+
+  <main>
+    <div class="container layout">
+      <section class="card">
+        <h2>需求表单</h2>
+
+        <div class="upload-box">
+          <strong>上传 3D 模型文件</strong>
+          支持 STL / OBJ / 3MF / ZIP 等格式
+          <div class="small" style="margin-top:8px;">这里目前是静态原型，后续可以接入真实文件上传功能。</div>
+          <button class="btn" style="margin-top:14px;">选择文件</button>
+        </div>
+
+        <input class="field" placeholder="项目名称，例如：手办模型 / 结构样件 / 外壳件" />
+
+        <div class="grid-2">
+          <select>
+            <option>选择材料</option>
+            <option>PLA</option>
+            <option>ABS</option>
+            <option>PETG</option>
+            <option>Resin</option>
+            <option>TPU</option>
+          </select>
+          <select>
+            <option>选择颜色</option>
+            <option>白色</option>
+            <option>黑色</option>
+            <option>灰色</option>
+            <option>透明</option>
+            <option>定制颜色</option>
+          </select>
+        </div>
+
+        <div class="grid-2">
+          <input class="field" placeholder="数量" />
+          <select>
+            <option>精度要求</option>
+            <option>普通精度</option>
+            <option>中等精度</option>
+            <option>高精度</option>
+          </select>
+        </div>
+
+        <div class="grid-2">
+          <select>
+            <option>交付方式</option>
+            <option>本地自提</option>
+            <option>邮寄</option>
+          </select>
+          <select>
+            <option>交期要求</option>
+            <option>正常排单</option>
+            <option>3天内</option>
+            <option>加急处理</option>
+          </select>
+        </div>
+
+        <select>
+          <option>表面处理需求</option>
+          <option>无需处理</option>
+          <option>基础打磨</option>
+          <option>喷涂</option>
+          <option>基础上色</option>
+        </select>
+
+        <textarea placeholder="备注说明，例如：模型用途、强度要求、尺寸公差、是否需要加急、是否能接受拼接打印等"></textarea>
+
+        <div class="notice">
+          如果你的模型对尺寸、公差、强度有明确要求，建议在备注中写清楚，这会显著提高商家报价的准确度。
+        </div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+          <button class="btn btn-dark">提交需求</button>
+          <button class="btn">保存草稿</button>
+        </div>
+      </section>
+
+      <aside class="summary-card">
+        <div class="summary-box">
+          <div class="summary-title">需求提交说明</div>
+          <div class="summary-row"><span>支持格式</span><strong>STL / OBJ / 3MF</strong></div>
+          <div class="summary-row"><span>报价方式</span><strong>商家人工报价</strong></div>
+          <div class="summary-row"><span>适用场景</span><strong>手办 / 打样 / 零件</strong></div>
+          <div class="summary-row"><span>订单状态</span><strong>可后续扩展</strong></div>
+        </div>
+
+        <div class="card" style="padding:20px;">
+          <h2 style="font-size:22px; margin-bottom:14px;">下单前建议</h2>
+          <div class="tip-list">
+            <div class="tip">
+              <div class="tip-title">尽量上传可打印模型</div>
+              <div class="small">薄壁、悬空、未封闭模型都可能影响打印结果和报价。</div>
+            </div>
+            <div class="tip">
+              <div class="tip-title">把用途写清楚</div>
+              <div class="small">展示件、结构件、功能件，对材料和精度的要求会完全不同。</div>
+            </div>
+            <div class="tip">
+              <div class="tip-title">第一次下单建议先打样</div>
+              <div class="small">尤其是批量订单，先做一个样件能减少后续返工风险。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dark-tip">
+          <h3>平台保障方向</h3>
+          <p>后续可扩展成担保交易、订单状态追踪、售后与评价体系。</p>
+          <p>当前阶段先把需求发布、商家展示和报价流程跑通最重要。</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

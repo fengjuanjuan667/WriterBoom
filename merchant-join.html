@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WriterBoom - 商家入驻</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC","Hiragino Sans GB","Microsoft YaHei", sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.5; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+    .header { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.95); backdrop-filter: blur(10px); border-bottom: 1px solid #e2e8f0; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-badge { width: 42px; height: 42px; border-radius: 16px; background: #0f172a; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+    .brand-title { font-size: 18px; font-weight: 700; }
+    .brand-sub { font-size: 12px; color: #64748b; }
+    .nav { display: flex; gap: 28px; color: #475569; font-size: 14px; }
+    .actions { display: flex; gap: 12px; }
+    .btn { border: 1px solid #cbd5e1; background: white; color: #0f172a; border-radius: 14px; padding: 10px 16px; font-size: 14px; cursor: pointer; }
+    .btn-dark { background: #0f172a; color: white; border-color: #0f172a; }
+    .hero { background: white; border-bottom: 1px solid #e2e8f0; }
+    .hero-inner { padding: 28px 0 38px; }
+    .crumbs { color: #64748b; font-size: 14px; margin-bottom: 12px; }
+    h1 { margin: 0; font-size: 34px; }
+    .sub { color: #64748b; margin-top: 10px; max-width: 820px; }
+    .hero-grid { display: grid; grid-template-columns: 1fr 360px; gap: 24px; margin-top: 24px; }
+    .hero-card, .stats-card {
+      background: linear-gradient(135deg, #ffffff, #f8fafc);
+      border: 1px solid #e2e8f0; border-radius: 30px; padding: 24px;
+      box-shadow: 0 8px 24px rgba(15,23,42,.04);
+    }
+    .badge-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+    .tag { background: #f1f5f9; color: #475569; border-radius: 999px; padding: 6px 10px; font-size: 12px; }
+    .tag.green { background: #ecfdf5; color: #047857; }
+    .hero-points { margin-top: 18px; display: grid; gap: 12px; }
+    .hero-point {
+      border: 1px solid #e2e8f0; border-radius: 18px; padding: 14px 16px; background: white;
+    }
+    .hero-point strong { display: block; margin-bottom: 4px; }
+    .stats-list { display: grid; gap: 12px; }
+    .stats-item {
+      border: 1px solid #e2e8f0; border-radius: 18px; padding: 14px 16px; background: white;
+    }
+    .stats-item .label { color: #64748b; font-size: 12px; }
+    .stats-item .value { font-size: 24px; font-weight: 700; margin-top: 6px; }
+    main { padding: 28px 0 64px; }
+    .layout { display: grid; grid-template-columns: 1fr 360px; gap: 24px; align-items: start; }
+    .card {
+      background: white; border: 1px solid #e2e8f0; border-radius: 30px; padding: 26px;
+      box-shadow: 0 8px 24px rgba(15,23,42,.04);
+    }
+    .card h2 { margin: 0 0 18px; font-size: 26px; }
+    .field, select, textarea {
+      width: 100%; padding: 14px 16px; border-radius: 16px; border: 1px solid #e2e8f0;
+      background: white; font-size: 14px; color: #0f172a; margin-bottom: 14px; font-family: inherit;
+    }
+    textarea { min-height: 110px; resize: vertical; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .upload-box {
+      border: 2px dashed #cbd5e1; border-radius: 22px; padding: 24px; text-align: center;
+      background: #fafafa; color: #64748b; margin-bottom: 16px;
+    }
+    .upload-box strong { display: block; color: #0f172a; font-size: 18px; margin-bottom: 8px; }
+    .small { font-size: 13px; color: #64748b; }
+    .section-title {
+      font-size: 18px; font-weight: 700; margin: 18px 0 12px;
+      padding-top: 18px; border-top: 1px solid #e2e8f0;
+    }
+    .notice {
+      margin-top: 8px; padding: 14px 16px; border-radius: 18px;
+      background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; font-size: 14px;
+    }
+    .sticky-side { position: sticky; top: 92px; display: grid; gap: 18px; }
+    .check-list { display: grid; gap: 12px; }
+    .check-item {
+      border: 1px solid #e2e8f0; border-radius: 20px; padding: 16px; background: #fcfcfd;
+    }
+    .check-item strong { display: block; margin-bottom: 6px; }
+    .dark-tip { background: #0f172a; color: white; border-radius: 28px; padding: 20px; }
+    .dark-tip h3 { margin: 0 0 10px; font-size: 18px; }
+    .dark-tip p { margin: 0 0 8px; color: rgba(255,255,255,.72); font-size: 14px; }
+    .flow { display: grid; gap: 12px; }
+    .flow-step {
+      border: 1px solid #e2e8f0; border-radius: 18px; padding: 14px 16px; background: white;
+    }
+    .flow-step .num {
+      display: inline-flex; width: 26px; height: 26px; border-radius: 999px;
+      align-items: center; justify-content: center; background: #0f172a; color: white;
+      font-size: 12px; font-weight: 700; margin-right: 10px;
+    }
+    @media (max-width: 980px) {
+      .nav { display: none; }
+      .hero-grid, .layout, .grid-2 { grid-template-columns: 1fr; }
+      .sticky-side { position: static; }
+    }
+    @media (max-width: 720px) {
+      h1 { font-size: 28px; }
+      .actions { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-badge">WB</div>
+        <div>
+          <div class="brand-title">WriterBoom</div>
+          <div class="brand-sub">3D打印共享平台</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#">首页</a>
+        <a href="#">找商家</a>
+        <a href="#">发布需求</a>
+        <a href="#">商家入驻</a>
+      </nav>
+      <div class="actions">
+        <button class="btn">登录</button>
+        <button class="btn btn-dark">注册</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="crumbs">首页 / 商家入驻</div>
+      <h1>让闲置 3D 打印机开始赚钱</h1>
+      <div class="sub">上传设备信息、历史作品和服务资料，通过审核后即可在平台展示店铺、接收询价与订单。适合个人机主、小型工作室和有稳定打印能力的创客。</div>
+
+      <div class="hero-grid">
+        <div class="hero-card">
+          <div class="badge-row">
+            <span class="tag green">个人机主可入驻</span>
+            <span class="tag">小型工作室可入驻</span>
+            <span class="tag">支持本地 / 异地接单</span>
+          </div>
+
+          <div class="hero-points">
+            <div class="hero-point">
+              <strong>展示你的设备与案例</strong>
+              通过店铺页、作品案例和材料能力展示，帮助用户更快了解你的服务能力。
+            </div>
+            <div class="hero-point">
+              <strong>获得更标准化的订单来源</strong>
+              让用户按城市、材料、设备类型找到你，而不是私聊零散接单。
+            </div>
+            <div class="hero-point">
+              <strong>逐步建立口碑与评分</strong>
+              完成订单后可以积累评价、准时率、接单量，让你的店铺更有信任感。
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-card">
+          <div class="stats-list">
+            <div class="stats-item">
+              <div class="label">适合入驻对象</div>
+              <div class="value">个人 / 小店</div>
+            </div>
+            <div class="stats-item">
+              <div class="label">审核资料类型</div>
+              <div class="value">身份 + 设备 + 案例</div>
+            </div>
+            <div class="stats-item">
+              <div class="label">接单模式</div>
+              <div class="value">询价 / 报价 / 下单</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="container layout">
+      <section class="card">
+        <h2>商家入驻申请表</h2>
+
+        <div class="grid-2">
+          <input class="field" placeholder="姓名 / 店铺名" />
+          <input class="field" placeholder="联系电话 / 微信 / 邮箱" />
+        </div>
+
+        <div class="grid-2">
+          <input class="field" placeholder="所在城市，例如：深圳" />
+          <select>
+            <option>服务方式</option>
+            <option>仅支持本地自提</option>
+            <option>仅支持邮寄</option>
+            <option>自提 + 邮寄都支持</option>
+          </select>
+        </div>
+
+        <textarea placeholder="店铺简介 / 个人介绍，例如：擅长工业样件、树脂手办、教学模型、功能件打印等"></textarea>
+
+        <div class="section-title">身份与基础资料</div>
+
+        <div class="upload-box">
+          <strong>上传身份资料</strong>
+          身份证 / 营业证明 / 个人实名认证资料
+          <div class="small" style="margin-top:8px;">当前是静态原型，后续可接入真实上传与后台审核。</div>
+          <button class="btn" style="margin-top:14px;">选择文件</button>
+        </div>
+
+        <div class="section-title">设备信息</div>
+
+        <div class="grid-2">
+          <select>
+            <option>打印机类型</option>
+            <option>FDM</option>
+            <option>SLA</option>
+            <option>SLS</option>
+            <option>多种类型</option>
+          </select>
+          <input class="field" placeholder="设备品牌 / 型号，例如：Bambu Lab / Formlabs" />
+        </div>
+
+        <div class="grid-2">
+          <input class="field" placeholder="最大打印尺寸，例如：256 × 256 × 256 mm" />
+          <input class="field" placeholder="层高精度，例如：0.05–0.2 mm" />
+        </div>
+
+        <input class="field" placeholder="支持材料，例如：PLA / ABS / PETG / Resin" />
+
+        <div class="upload-box">
+          <strong>上传设备实拍图</strong>
+          建议上传打印机实拍照片、工作环境照片，帮助平台审核真实性。
+          <button class="btn" style="margin-top:14px;">上传设备图片</button>
+        </div>
+
+        <div class="section-title">案例与服务能力</div>
+
+        <div class="upload-box">
+          <strong>上传过往作品案例</strong>
+          建议上传 3–6 张典型案例图，附上材料、用途、工艺说明。
+          <button class="btn" style="margin-top:14px;">上传案例图片</button>
+        </div>
+
+        <textarea placeholder="请补充说明你的擅长方向，例如：工业打样、手办树脂件、功能件、教学模型、后处理服务等"></textarea>
+
+        <div class="notice">
+          平台建议：案例图尽量真实、清晰、带有不同类型的打印结果，能显著提升审核通过率和后续接单转化。
+        </div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+          <button class="btn btn-dark">提交入驻申请</button>
+          <button class="btn">保存草稿</button>
+        </div>
+      </section>
+
+      <aside class="sticky-side">
+        <div class="card" style="padding:20px;">
+          <h2 style="font-size:22px; margin-bottom:14px;">入驻审核重点</h2>
+          <div class="check-list">
+            <div class="check-item">
+              <strong>身份真实性</strong>
+              <div class="small">平台需要确认你是可联系、可履约的真实服务提供者。</div>
+            </div>
+            <div class="check-item">
+              <strong>设备真实性</strong>
+              <div class="small">上传真实设备图和基础参数，可以降低虚假入驻风险。</div>
+            </div>
+            <div class="check-item">
+              <strong>案例真实性</strong>
+              <div class="small">过往作品越具体，越容易建立信任，也更容易通过审核。</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="padding:20px;">
+          <h2 style="font-size:22px; margin-bottom:14px;">入驻流程</h2>
+          <div class="flow">
+            <div class="flow-step"><span class="num">1</span>填写基础资料</div>
+            <div class="flow-step"><span class="num">2</span>上传设备与案例</div>
+            <div class="flow-step"><span class="num">3</span>提交平台审核</div>
+            <div class="flow-step"><span class="num">4</span>通过后开通店铺</div>
+          </div>
+        </div>
+
+        <div class="dark-tip">
+          <h3>后续可扩展方向</h3>
+          <p>后面这页可以增加店铺定价规则、服务区域、营业时间、自动接单设置等功能。</p>
+          <p>当前阶段先把入驻申请、资料审核、店铺上线流程跑通最重要。</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>

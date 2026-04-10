@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WriterBoom - 商家后台</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC","Hiragino Sans GB","Microsoft YaHei", sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.5; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+    .header { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.95); backdrop-filter: blur(10px); border-bottom: 1px solid #e2e8f0; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-badge { width: 42px; height: 42px; border-radius: 16px; background: #0f172a; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+    .brand-title { font-size: 18px; font-weight: 700; }
+    .brand-sub { font-size: 12px; color: #64748b; }
+    .nav { display: flex; gap: 28px; color: #475569; font-size: 14px; }
+    .actions { display: flex; gap: 12px; }
+    .btn { border: 1px solid #cbd5e1; background: white; color: #0f172a; border-radius: 14px; padding: 10px 16px; font-size: 14px; cursor: pointer; }
+    .btn-dark { background: #0f172a; color: white; border-color: #0f172a; }
+    .hero { background: white; border-bottom: 1px solid #e2e8f0; }
+    .hero-inner { padding: 28px 0 34px; }
+    .crumbs { color: #64748b; font-size: 14px; margin-bottom: 12px; }
+    h1 { margin: 0; font-size: 34px; }
+    .sub { color: #64748b; margin-top: 8px; }
+    main { padding: 28px 0 64px; }
+    .layout { display: grid; grid-template-columns: 290px 1fr; gap: 24px; align-items: start; }
+    .sidebar, .card {
+      background: white; border: 1px solid #e2e8f0; border-radius: 30px; padding: 24px;
+      box-shadow: 0 8px 24px rgba(15,23,42,.04);
+    }
+    .sidebar { position: sticky; top: 92px; }
+    .profile { display: flex; gap: 14px; align-items: center; margin-bottom: 22px; }
+    .avatar { width: 64px; height: 64px; border-radius: 22px; background: #e2e8f0; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700; color: #334155; }
+    .name { font-size: 20px; font-weight: 700; }
+    .muted { color: #64748b; }
+    .menu { display: grid; gap: 10px; }
+    .menu-item { border: 1px solid #e2e8f0; border-radius: 18px; padding: 14px 16px; background: #fcfcfd; }
+    .menu-item.active { border-color: #0f172a; box-shadow: inset 0 0 0 1px #0f172a; background: #f8fafc; }
+    .content { display: grid; gap: 22px; }
+    .card h2 { margin: 0 0 16px; font-size: 26px; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .stat { border: 1px solid #e2e8f0; border-radius: 20px; padding: 18px; background: #fafafa; }
+    .stat .label { font-size: 12px; color: #64748b; }
+    .stat .value { font-size: 24px; font-weight: 700; margin-top: 8px; }
+    .stat .subv { margin-top: 4px; font-size: 13px; color: #64748b; }
+    .section-head { display: flex; justify-content: space-between; gap: 16px; align-items: center; margin-bottom: 14px; }
+    .order-list, .case-list { display: grid; gap: 14px; }
+    .order, .case {
+      border: 1px solid #e2e8f0; border-radius: 22px; padding: 18px; background: #fcfcfd;
+      display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center;
+    }
+    .order-title, .case-title { font-size: 18px; font-weight: 700; }
+    .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    .tag { background: #f1f5f9; color: #475569; border-radius: 999px; padding: 6px 10px; font-size: 12px; }
+    .tag.blue { background: #eff6ff; color: #1d4ed8; }
+    .tag.green { background: #ecfdf5; color: #047857; }
+    .tag.orange { background: #fff7ed; color: #c2410c; }
+    .meta { margin-top: 10px; font-size: 14px; color: #64748b; }
+    .right-actions { display: grid; gap: 10px; min-width: 140px; }
+    .quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .quick-box { border: 1px solid #e2e8f0; border-radius: 22px; padding: 18px; background: #fafafa; }
+    .quick-box strong { display: block; margin-bottom: 8px; font-size: 18px; }
+    .notice {
+      padding: 14px 16px; border-radius: 18px; background: #eff6ff; color: #1e40af;
+      border: 1px solid #bfdbfe; font-size: 14px;
+    }
+    @media (max-width: 980px) {
+      .nav { display: none; }
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .stats, .quick-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 720px) {
+      h1 { font-size: 28px; }
+      .actions { display: none; }
+      .stats, .quick-grid { grid-template-columns: 1fr; }
+      .order, .case { grid-template-columns: 1fr; }
+      .right-actions { min-width: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-badge">WB</div>
+        <div>
+          <div class="brand-title">WriterBoom</div>
+          <div class="brand-sub">3D打印共享平台</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="index.html">首页</a>
+        <a href="merchant-list.html">找商家</a>
+        <a href="request-print.html">发布需求</a>
+        <a href="merchant-join.html">商家入驻</a>
+      </nav>
+      <div class="actions">
+        <button class="btn" onclick="location.href='merchant-detail.html'">我的店铺</button>
+        <button class="btn btn-dark">商家后台</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="crumbs">首页 / 商家后台</div>
+      <h1>Layer Lab 商家后台</h1>
+      <div class="sub">这里可以查看询价、管理订单、更新店铺资料和维护作品案例。当前为静态原型，后续可接入真实商家系统。</div>
+    </div>
+  </section>
+
+  <main>
+    <div class="container layout">
+      <aside class="sidebar">
+        <div class="profile">
+          <div class="avatar">LL</div>
+          <div>
+            <div class="name">Layer Lab</div>
+            <div class="muted">认证商家</div>
+          </div>
+        </div>
+
+        <div class="menu">
+          <div class="menu-item active">数据概览</div>
+          <div class="menu-item">订单管理</div>
+          <div class="menu-item">询价管理</div>
+          <div class="menu-item">作品案例</div>
+          <div class="menu-item">设备信息</div>
+          <div class="menu-item">店铺设置</div>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div class="card">
+          <h2>经营概览</h2>
+          <div class="stats">
+            <div class="stat">
+              <div class="label">本月新询价</div>
+              <div class="value">18</div>
+              <div class="subv">较上月 +4</div>
+            </div>
+            <div class="stat">
+              <div class="label">待处理订单</div>
+              <div class="value">6</div>
+              <div class="subv">含 2 个加急单</div>
+            </div>
+            <div class="stat">
+              <div class="label">本月收入</div>
+              <div class="value">¥3,860</div>
+              <div class="subv">仅展示原型数据</div>
+            </div>
+            <div class="stat">
+              <div class="label">综合评分</div>
+              <div class="value">4.9</div>
+              <div class="subv">近 30 天稳定</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <h2>待处理订单</h2>
+            <button class="btn">查看全部</button>
+          </div>
+
+          <div class="order-list">
+            <div class="order">
+              <div>
+                <div class="order-title">机械结构样件打印</div>
+                <div class="tags">
+                  <span class="tag">PLA</span>
+                  <span class="tag">1 件</span>
+                  <span class="tag orange">待报价</span>
+                </div>
+                <div class="meta">用户：Juju · 提交时间：2026-04-11 · 需求：结构验证件，偏重尺寸准确</div>
+              </div>
+              <div class="right-actions">
+                <button class="btn btn-dark">立即报价</button>
+                <button class="btn">查看详情</button>
+              </div>
+            </div>
+
+            <div class="order">
+              <div>
+                <div class="order-title">树脂手办模型</div>
+                <div class="tags">
+                  <span class="tag">Resin</span>
+                  <span class="tag">2 件</span>
+                  <span class="tag blue">打印中</span>
+                </div>
+                <div class="meta">用户：Lin · 下单时间：2026-04-10 · 要求：高精度表面，后续需打磨处理</div>
+              </div>
+              <div class="right-actions">
+                <button class="btn btn-dark">更新状态</button>
+                <button class="btn">联系用户</button>
+              </div>
+            </div>
+
+            <div class="order">
+              <div>
+                <div class="order-title">教学建筑模型</div>
+                <div class="tags">
+                  <span class="tag">ABS</span>
+                  <span class="tag">1 套</span>
+                  <span class="tag green">待发货</span>
+                </div>
+                <div class="meta">用户：Chen · 完成时间：2026-04-11 · 当前待确认包装与物流信息</div>
+              </div>
+              <div class="right-actions">
+                <button class="btn btn-dark">填写物流</button>
+                <button class="btn">查看详情</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-head">
+            <h2>作品案例管理</h2>
+            <button class="btn btn-dark">新增案例</button>
+          </div>
+
+          <div class="case-list">
+            <div class="case">
+              <div>
+                <div class="case-title">机械结构原型</div>
+                <div class="tags">
+                  <span class="tag">PLA</span>
+                  <span class="tag">工业打样</span>
+                </div>
+                <div class="meta">已展示在店铺详情页，用于说明结构件和功能件打印能力。</div>
+              </div>
+              <div class="right-actions">
+                <button class="btn btn-dark">编辑</button>
+                <button class="btn">下架</button>
+              </div>
+            </div>
+
+            <div class="case">
+              <div>
+                <div class="case-title">树脂展示模型</div>
+                <div class="tags">
+                  <span class="tag">Resin</span>
+                  <span class="tag">高精度</span>
+                </div>
+                <div class="meta">展示树脂细节能力，适合手办和小型高精度订单。</div>
+              </div>
+              <div class="right-actions">
+                <button class="btn btn-dark">编辑</button>
+                <button class="btn">下架</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>快捷操作</h2>
+          <div class="quick-grid">
+            <div class="quick-box">
+              <strong>更新设备信息</strong>
+              <div class="muted">修改打印机型号、材料支持、精度范围和最大打印尺寸。</div>
+              <div style="margin-top:12px;"><button class="btn">去更新</button></div>
+            </div>
+            <div class="quick-box">
+              <strong>编辑店铺资料</strong>
+              <div class="muted">优化店铺介绍、接单范围、价格说明和服务方式。</div>
+              <div style="margin-top:12px;"><button class="btn">去编辑</button></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="notice">
+          当前还是静态原型。后续这页可以继续扩展成真实报价流程、订单状态流转、收入统计和消息提醒系统。
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

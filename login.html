@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WriterBoom - 登录注册</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC","Hiragino Sans GB", "Microsoft YaHei", sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.5; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .header { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.95); backdrop-filter: blur(10px); border-bottom: 1px solid #e2e8f0; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-badge { width: 42px; height: 42px; border-radius: 16px; background: #0f172a; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+    .brand-title { font-size: 18px; font-weight: 700; }
+    .brand-sub { font-size: 12px; color: #64748b; }
+    .nav { display: flex; gap: 28px; color: #475569; font-size: 14px; }
+    .actions { display: flex; gap: 12px; }
+    .btn { border: 1px solid #cbd5e1; background: white; color: #0f172a; border-radius: 14px; padding: 10px 16px; font-size: 14px; cursor: pointer; }
+    .btn-dark { background: #0f172a; color: white; border-color: #0f172a; }
+    .hero { background: white; border-bottom: 1px solid #e2e8f0; }
+    .hero-inner { padding: 28px 0 34px; }
+    .crumbs { color: #64748b; font-size: 14px; margin-bottom: 12px; }
+    h1 { margin: 0; font-size: 34px; }
+    .sub { color: #64748b; margin-top: 8px; max-width: 760px; }
+    main { padding: 34px 0 70px; }
+    .layout { display: grid; grid-template-columns: 1fr 460px; gap: 28px; align-items: start; }
+    .feature-box, .form-box { background: white; border: 1px solid #e2e8f0; border-radius: 32px; padding: 28px; box-shadow: 0 10px 28px rgba(15,23,42,.04); }
+    .feature-box h2, .form-box h2 { margin: 0 0 16px; font-size: 28px; }
+    .muted { color: #64748b; }
+    .feature-grid { display: grid; gap: 14px; margin-top: 20px; }
+    .feature-item { border: 1px solid #e2e8f0; border-radius: 20px; padding: 16px 18px; background: #fcfcfd; }
+    .feature-item strong { display: block; margin-bottom: 6px; font-size: 16px; }
+    .mini-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 18px; }
+    .mini-card { border: 1px solid #e2e8f0; border-radius: 20px; padding: 18px; background: #fafafa; }
+    .mini-card .label { font-size: 12px; color: #64748b; }
+    .mini-card .value { font-size: 18px; font-weight: 700; margin-top: 6px; }
+    .tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
+    .tab { text-align: center; padding: 12px 14px; border-radius: 16px; border: 1px solid #e2e8f0; background: #fff; color: #475569; font-weight: 600; }
+    .tab.active { background: #0f172a; color: white; border-color: #0f172a; }
+    .role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+    .role-card { border: 1px solid #e2e8f0; border-radius: 18px; padding: 16px; background: #fcfcfd; }
+    .role-card.active { border-color: #0f172a; background: #f8fafc; box-shadow: inset 0 0 0 1px #0f172a; }
+    .role-card strong { display: block; margin-bottom: 6px; }
+    .field, select { width: 100%; padding: 14px 16px; border-radius: 16px; border: 1px solid #e2e8f0; background: white; font-size: 14px; color: #0f172a; margin-bottom: 14px; }
+    .row { display: grid; grid-template-columns: 1fr 140px; gap: 12px; }
+    .helper { display: flex; justify-content: space-between; gap: 16px; align-items: center; margin: 6px 0 16px; font-size: 13px; color: #64748b; }
+    .notice { margin-top: 16px; padding: 14px 16px; border-radius: 18px; background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; font-size: 14px; }
+    .dark-tip { margin-top: 18px; background: #0f172a; color: white; border-radius: 24px; padding: 18px; }
+    .dark-tip h3 { margin: 0 0 8px; font-size: 18px; }
+    .dark-tip p { margin: 0 0 6px; color: rgba(255,255,255,.72); font-size: 14px; }
+    @media (max-width: 980px) { .nav { display: none; } .layout { grid-template-columns: 1fr; } }
+    @media (max-width: 720px) { h1 { font-size: 28px; } .actions { display: none; } .mini-cards, .tabs, .role-grid, .row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-badge">WB</div>
+        <div>
+          <div class="brand-title">WriterBoom</div>
+          <div class="brand-sub">3D打印共享平台</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="index.html">首页</a>
+        <a href="merchant-list.html">找商家</a>
+        <a href="request-print.html">发布需求</a>
+        <a href="merchant-join.html">商家入驻</a>
+      </nav>
+      <div class="actions">
+        <button class="btn" onclick="location.href='login.html'">登录</button>
+        <button class="btn btn-dark" onclick="location.href='login.html'">注册</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="crumbs">首页 / 登录注册</div>
+      <h1>登录或注册你的平台账号</h1>
+      <div class="sub">普通用户可以发布打印需求、收藏商家、查看订单；商家用户可以申请入驻、展示设备能力、接收询价与订单。</div>
+    </div>
+  </section>
+
+  <main>
+    <div class="container layout">
+      <section class="feature-box">
+        <h2>为什么要注册账号</h2>
+        <div class="muted">账号系统会是后续订单、审核、消息和评价体系的基础。当前页面是静态原型，后面可以接入真实登录功能。</div>
+
+        <div class="feature-grid">
+          <div class="feature-item">
+            <strong>普通用户功能</strong>
+            发布打印需求、管理订单、收藏商家、查看历史记录。
+          </div>
+          <div class="feature-item">
+            <strong>商家用户功能</strong>
+            提交入驻审核、完善店铺资料、上传案例、接收询价和订单。
+          </div>
+          <div class="feature-item">
+            <strong>后续扩展方向</strong>
+            登录后可进入用户中心、商家后台、订单中心和审核状态页。
+          </div>
+        </div>
+
+        <div class="mini-cards">
+          <div class="mini-card">
+            <div class="label">账号类型</div>
+            <div class="value">用户 / 商家</div>
+          </div>
+          <div class="mini-card">
+            <div class="label">登录方式</div>
+            <div class="value">手机号 / 邮箱</div>
+          </div>
+        </div>
+
+        <div class="dark-tip">
+          <h3>当前建议</h3>
+          <p>MVP 阶段可以先做最简单的手机号或邮箱登录。</p>
+          <p>后面再加验证码、找回密码、第三方登录、实名认证等能力。</p>
+        </div>
+      </section>
+
+      <section class="form-box">
+        <h2>账号入口</h2>
+
+        <div class="tabs">
+          <div class="tab active">登录</div>
+          <div class="tab">注册</div>
+        </div>
+
+        <div class="role-grid">
+          <div class="role-card active">
+            <strong>普通用户</strong>
+            我想找商家、提交打印需求和查看订单。
+          </div>
+          <div class="role-card">
+            <strong>商家用户</strong>
+            我有设备，想申请入驻并开始接单。
+          </div>
+        </div>
+
+        <input class="field" placeholder="手机号或邮箱" />
+        <input class="field" placeholder="请输入密码" />
+
+        <div class="row">
+          <input class="field" placeholder="验证码" />
+          <button class="btn">获取验证码</button>
+        </div>
+
+        <div class="helper">
+          <span>记住我</span>
+          <a href="#" class="muted">忘记密码？</a>
+        </div>
+
+        <button class="btn btn-dark" style="width:100%;">立即登录</button>
+        <button class="btn" style="width:100%; margin-top:10px;">切换到注册</button>
+
+        <div class="notice">
+          如果你是商家，建议先注册账号，再进入“商家入驻”页面提交设备和案例资料。
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

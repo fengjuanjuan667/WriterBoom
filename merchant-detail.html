@@ -87,14 +87,14 @@
         </div>
       </div>
       <nav class="nav">
-        <a href="#">首页</a>
-        <a href="#">找商家</a>
-        <a href="#">发布需求</a>
-        <a href="#">商家入驻</a>
+        <a href="index.html">首页</a>
+        <a href="merchant-list.html">找商家</a>
+        <a href="request-print.html">发布需求</a>
+        <a href="merchant-join.html">商家入驻</a>
       </nav>
       <div class="actions">
-        <button class="btn">登录</button>
-        <button class="btn btn-dark">注册</button>
+        <button class="btn" onclick="location.href='login.html'">登录</button>
+        <button class="btn btn-dark" onclick="location.href='login.html'">注册</button>
       </div>
     </div>
   </header>
@@ -140,9 +140,9 @@
             <div class="side-row"><span>常用材料</span><strong>PLA / ABS / Resin</strong></div>
           </div>
           <div class="action-grid">
-            <button class="btn btn-dark">提交打印需求</button>
-            <button class="btn">立即询价</button>
-            <button class="btn">收藏商家</button>
+            <button class="btn btn-dark" onclick="location.href='request-print.html'">提交打印需求</button>
+            <button class="btn" onclick="location.href='request-print.html'">立即询价</button>
+            <button class="btn" onclick="location.href='user-center.html'">收藏商家</button>
           </div>
         </div>
       </div>
@@ -205,7 +205,7 @@
 
       <aside class="sidebar-sticky">
         <div class="form-card">
-          <h3>提交打印需求</h3>
+          <h3 onclick="location.href='request-print.html'">提交打印需求</h3>
           <input class="field" placeholder="项目名称，例如：手办模型 / 结构样件" />
           <select><option>选择材料</option><option>PLA</option><option>ABS</option><option>PETG</option><option>Resin</option></select>
           <select><option>选择颜色</option><option>白色</option><option>黑色</option><option>灰色</option><option>透明</option></select>

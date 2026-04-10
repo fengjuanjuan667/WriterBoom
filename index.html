@@ -153,14 +153,14 @@
         </div>
       </div>
       <nav class="nav">
-        <a href="#">首页</a>
-        <a href="#makers">找商家</a>
-        <a href="#demand">发布需求</a>
-        <a href="#join">商家入驻</a>
+        <a href="index.html">首页</a>
+        <a href="merchant-list.html">找商家</a>
+        <a href="request-print.html">发布需求</a>
+        <a href="merchant-join.html">商家入驻</a>
       </nav>
       <div class="actions">
-        <button class="btn">登录</button>
-        <button class="btn btn-dark">注册</button>
+        <button class="btn" onclick="location.href='login.html'">登录</button>
+        <button class="btn btn-dark" onclick="location.href='login.html'">注册</button>
       </div>
     </div>
   </header>
@@ -172,8 +172,8 @@
         <h1>附近就能找到 <span class="muted">3D 打印服务</span></h1>
         <p>上传模型，选择商家，确认材料与交期，完成从需求发布到打印交付的完整流程。</p>
         <div class="hero-actions">
-          <button class="btn btn-dark">立即找商家</button>
-          <button class="btn">发布打印需求</button>
+          <button class="btn btn-dark" onclick="location.href='merchant-list.html'">立即找商家</button>
+          <button class="btn" onclick="location.href='request-print.html'">发布打印需求</button>
         </div>
       </div>
 
@@ -234,7 +234,7 @@
             <h2>推荐商家</h2>
             <p>优先展示资料完整、案例真实、信息清晰的打印服务商。</p>
           </div>
-          <button class="btn">查看全部</button>
+          <button class="btn" onclick="location.href='merchant-list.html'">查看全部</button>
         </div>
 
         <div class="makers">
@@ -253,8 +253,8 @@
               <div class="meta-row"><span>起印价格</span><strong>¥25 起</strong></div>
             </div>
             <div class="maker-actions">
-              <button class="btn">查看详情</button>
-              <button class="btn btn-dark">立即询价</button>
+              <button class="btn" onclick="location.href='merchant-detail.html'">查看详情</button>
+              <button class="btn btn-dark" onclick="location.href='request-print.html'">立即询价</button>
             </div>
           </div>
 
@@ -273,8 +273,8 @@
               <div class="meta-row"><span>起印价格</span><strong>¥18 起</strong></div>
             </div>
             <div class="maker-actions">
-              <button class="btn">查看详情</button>
-              <button class="btn btn-dark">立即询价</button>
+              <button class="btn" onclick="location.href='merchant-detail.html'">查看详情</button>
+              <button class="btn btn-dark" onclick="location.href='request-print.html'">立即询价</button>
             </div>
           </div>
 
@@ -293,8 +293,8 @@
               <div class="meta-row"><span>起印价格</span><strong>¥35 起</strong></div>
             </div>
             <div class="maker-actions">
-              <button class="btn">查看详情</button>
-              <button class="btn btn-dark">立即询价</button>
+              <button class="btn" onclick="location.href='merchant-detail.html'">查看详情</button>
+              <button class="btn btn-dark" onclick="location.href='request-print.html'">立即询价</button>
             </div>
           </div>
         </div>
@@ -353,7 +353,7 @@
             <input class="field" placeholder="姓名 / 店铺名" />
             <input class="field" placeholder="所在城市" />
             <input class="field" placeholder="设备型号，例如 Bambu Lab / Ender / Formlabs" />
-            <button class="btn btn-dark" style="width:100%;">申请入驻</button>
+            <button class="btn btn-dark" style="width:100%;" onclick="location.href='merchant-join.html'">申请入驻</button>
           </div>
         </div>
       </div>

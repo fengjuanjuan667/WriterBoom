@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PrintLink - 3D打印共享平台</title>
+  <title>WriterBoom - 3D打印共享平台</title>
   <style>
     * { box-sizing: border-box; }
     body {
@@ -148,19 +148,19 @@
       <div class="brand">
         <div class="brand-badge">3D</div>
         <div>
-          <div class="brand-title">PrintLink</div>
+          <div class="brand-title">WriterBoom</div>
           <div class="brand-sub">3D打印共享平台</div>
         </div>
       </div>
       <nav class="nav">
-        <a href="index.html">首页</a>
-        <a href="merchant-list.html">找商家</a>
-        <a href="request-print.html">发布需求</a>
-        <a href="merchant-join.html">商家入驻</a>
+        <a href="#">首页</a>
+        <a href="#makers">找商家</a>
+        <a href="#demand">发布需求</a>
+        <a href="#join">商家入驻</a>
       </nav>
       <div class="actions">
-        <button class="btn" onclick="location.href='login.html'">登录</button>
-        <button class="btn btn-dark" onclick="location.href='login.html'">注册</button>
+        <button class="btn">登录</button>
+        <button class="btn btn-dark">注册</button>
       </div>
     </div>
   </header>
@@ -168,17 +168,17 @@
   <main>
     <div class="container hero">
       <div>
-        <div class="pill">闲置设备变现 · 本地与异地打印服务</div>
-        <h1>附近就能找到 <span class="muted">3D 打印服务</span></h1>
-        <p>上传模型，选择商家，确认材料与交期，完成从需求发布到打印交付的完整流程。</p>
+        <div class="pill">连接个人机主与打印需求的 3D 打印平台</div>
+        <h1>更轻松地找到 <span class="muted">靠谱的 3D 打印服务</span></h1>
+        <p>上传模型、筛选商家、确认材料与交期，让 3D 打印服务像下单本地服务一样简单。</p>
         <div class="hero-actions">
-          <button class="btn btn-dark" onclick="location.href='merchant-list.html'">立即找商家</button>
-          <button class="btn" onclick="location.href='request-print.html'">发布打印需求</button>
+          <button class="btn btn-dark">立即找商家</button>
+          <button class="btn">发布打印需求</button>
         </div>
       </div>
 
       <div class="card search-card">
-        <h3>快速搜索打印服务</h3>
+        <h3>快速开始找商家</h3>
         <input class="field" placeholder="输入城市或关键词，例如：深圳 / 树脂 / 手办" />
         <div class="grid-2">
           <select>
@@ -199,7 +199,7 @@
         <div class="stats">
           <div class="stat">
             <strong>200+</strong>
-            潜在入驻商家
+            平台示例商家
           </div>
           <div class="stat">
             <strong>本地优先</strong>
@@ -218,7 +218,7 @@
           </div>
         </div>
         <div class="categories">
-          <div class="category"><div class="title">手办模型</div><div class="muted">查看该分类下的打印服务</div></div>
+          <div class="category"><div class="title">手办模型</div><div class="muted">浏览该类型服务商</div></div>
           <div class="category"><div class="title">工业样件</div><div class="muted">关注精度与交付效率</div></div>
           <div class="category"><div class="title">教学模型</div><div class="muted">适合学校与创客教育</div></div>
           <div class="category"><div class="title">个性礼品</div><div class="muted">礼物、摆件、定制小物</div></div>
@@ -232,9 +232,9 @@
         <div class="section-head">
           <div>
             <h2>推荐商家</h2>
-            <p>优先展示资料完整、案例真实、信息清晰的打印服务商。</p>
+            <p>优先展示资料完整、案例真实、能力清晰的服务商。</p>
           </div>
-          <button class="btn" onclick="location.href='merchant-list.html'">查看全部</button>
+          <button class="btn">查看全部</button>
         </div>
 
         <div class="makers">
@@ -253,8 +253,8 @@
               <div class="meta-row"><span>起印价格</span><strong>¥25 起</strong></div>
             </div>
             <div class="maker-actions">
-              <button class="btn" onclick="location.href='merchant-detail.html'">查看详情</button>
-              <button class="btn btn-dark" onclick="location.href='request-print.html'">立即询价</button>
+              <button class="btn">查看详情</button>
+              <button class="btn btn-dark">立即询价</button>
             </div>
           </div>
 
@@ -273,8 +273,8 @@
               <div class="meta-row"><span>起印价格</span><strong>¥18 起</strong></div>
             </div>
             <div class="maker-actions">
-              <button class="btn" onclick="location.href='merchant-detail.html'">查看详情</button>
-              <button class="btn btn-dark" onclick="location.href='request-print.html'">立即询价</button>
+              <button class="btn">查看详情</button>
+              <button class="btn btn-dark">立即询价</button>
             </div>
           </div>
 
@@ -293,8 +293,8 @@
               <div class="meta-row"><span>起印价格</span><strong>¥35 起</strong></div>
             </div>
             <div class="maker-actions">
-              <button class="btn" onclick="location.href='merchant-detail.html'">查看详情</button>
-              <button class="btn btn-dark" onclick="location.href='request-print.html'">立即询价</button>
+              <button class="btn">查看详情</button>
+              <button class="btn btn-dark">立即询价</button>
             </div>
           </div>
         </div>
@@ -306,7 +306,7 @@
         <div class="section-head">
           <div>
             <h2>真实作品案例</h2>
-            <p>让需求方更直观地判断打印效果与商家能力。</p>
+            <p>帮助需求方更直观地判断打印效果、精度和商家能力。</p>
           </div>
         </div>
 
@@ -324,7 +324,7 @@
         <div class="section-head" style="justify-content:center;text-align:center;">
           <div>
             <h2>为什么用户更需要这样的平台</h2>
-            <p>核心不是找得到打印机，而是找得到靠谱的打印服务。</p>
+            <p>关键不是“有没有机器”，而是“能不能找到值得信任的服务商”。</p>
           </div>
         </div>
 
@@ -342,9 +342,9 @@
         <div class="join-box">
           <div>
             <div class="pill" style="color:#fff;border-color:rgba(255,255,255,.2);">面向闲置机主与小型工作室</div>
-            <h2 style="font-size:42px;line-height:1.1;margin:0;">让闲置 3D 打印机开始赚钱</h2>
+            <h2 style="font-size:42px;line-height:1.1;margin:0;">让你的 3D 打印能力被更多人看见</h2>
             <p style="color:rgba(255,255,255,.72);max-width:560px;font-size:16px;margin-top:16px;">
-              上传设备信息与历史作品，通过审核后即可展示店铺、获取询价和订单，逐步建立你的打印服务口碑。
+              上传设备信息与过往案例，通过审核后即可展示店铺、接收询价与订单，逐步建立你的服务口碑。
             </p>
           </div>
 
@@ -353,7 +353,7 @@
             <input class="field" placeholder="姓名 / 店铺名" />
             <input class="field" placeholder="所在城市" />
             <input class="field" placeholder="设备型号，例如 Bambu Lab / Ender / Formlabs" />
-            <button class="btn btn-dark" style="width:100%;" onclick="location.href='merchant-join.html'">申请入驻</button>
+            <button class="btn btn-dark" style="width:100%;">申请入驻</button>
           </div>
         </div>
       </div>
@@ -362,7 +362,7 @@
 
   <footer>
     <div class="container footer-inner">
-      <div>© 2026 PrintLink. 让 3D 打印服务更容易被找到。</div>
+      <div>© 2026 WriterBoom. 让 3D 打印服务更容易被找到。</div>
       <div class="footer-links">
         <a href="#">平台规则</a>
         <a href="#">常见问题</a>

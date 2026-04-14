@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PrintLink - 商家列表页</title>
+  <title>WriterBoom - 商家列表页</title>
   <style>
     * { box-sizing: border-box; }
     body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC","Hiragino Sans GB", "Microsoft YaHei", sans-serif; background: #f8fafc; color: #0f172a; line-height: 1.5; }
@@ -76,19 +76,19 @@
       <div class="brand">
         <div class="brand-badge">3D</div>
         <div>
-          <div class="brand-title">PrintLink</div>
+          <div class="brand-title">WriterBoom</div>
           <div class="brand-sub">3D打印共享平台</div>
         </div>
       </div>
       <nav class="nav">
-        <a href="index.html">首页</a>
-        <a href="merchant-list.html">找商家</a>
-        <a href="request-print.html">发布需求</a>
-        <a href="merchant-join.html">商家入驻</a>
+        <a href="#">首页</a>
+        <a href="#">找商家</a>
+        <a href="#">发布需求</a>
+        <a href="#">商家入驻</a>
       </nav>
       <div class="actions">
-        <button class="btn" onclick="location.href='login.html'">登录</button>
-        <button class="btn btn-dark" onclick="location.href='login.html'">注册</button>
+        <button class="btn">登录</button>
+        <button class="btn btn-dark">注册</button>
       </div>
     </div>
   </header>
@@ -97,7 +97,7 @@
     <div class="container hero-inner">
       <div class="crumbs">首页 / 找商家</div>
       <h1>发现适合你的 3D 打印服务商</h1>
-      <div class="sub">按城市、材料、打印机类型、价格区间快速筛选，找到本地或异地的合适商家。</div>
+      <div class="sub">按城市、材料、打印机类型和价格区间筛选，快速找到更适合你需求的服务商。</div>
       <div class="search-row">
         <input class="field" placeholder="搜索城市 / 商家名称 / 手办 / 树脂 / 零件" />
         <select><option>全部打印类型</option><option>FDM</option><option>SLA</option><option>SLS</option></select>
@@ -110,7 +110,7 @@
   <main>
     <div class="container layout">
       <aside class="panel">
-        <h3>筛选条件</h3>
+        <h3>筛选与排序</h3>
         <div class="filter-group">
           <div class="filter-title">城市</div>
           <div class="chips">
@@ -145,7 +145,7 @@
         </div>
         <button class="btn btn-dark btn-full">应用筛选</button>
         <button class="btn btn-full" style="margin-top:10px;">重置条件</button>
-        <div class="footer-note">小建议：第一版平台优先突出“认证商家”“本地自提”“真实案例”，这三项最容易建立信任。</div>
+        <div class="footer-note">建议优先关注“认证商家”“真实案例”“准时率”这三类信息，它们最能帮助你快速判断是否值得下单。</div>
       </aside>
 
       <section>
@@ -188,8 +188,8 @@
                 <div class="side-row"><span>最近接单</span><strong>2 小时前</strong></div>
               </div>
               <div class="actions-row">
-                <button class="btn btn-dark btn-full" onclick="location.href='merchant-detail.html'">查看详情</button>
-                <button class="btn btn-full" onclick="location.href='request-print.html'">立即询价</button>
+                <button class="btn btn-dark btn-full">查看详情</button>
+                <button class="btn btn-full">立即询价</button>
                 <button class="btn btn-full">收藏商家</button>
               </div>
             </div>
@@ -226,8 +226,8 @@
                 <div class="side-row"><span>最近接单</span><strong>今天</strong></div>
               </div>
               <div class="actions-row">
-                <button class="btn btn-dark btn-full" onclick="location.href='merchant-detail.html'">查看详情</button>
-                <button class="btn btn-full" onclick="location.href='request-print.html'">立即询价</button>
+                <button class="btn btn-dark btn-full">查看详情</button>
+                <button class="btn btn-full">立即询价</button>
                 <button class="btn btn-full">收藏商家</button>
               </div>
             </div>
@@ -264,8 +264,8 @@
                 <div class="side-row"><span>最近接单</span><strong>昨天</strong></div>
               </div>
               <div class="actions-row">
-                <button class="btn btn-dark btn-full" onclick="location.href='merchant-detail.html'">查看详情</button>
-                <button class="btn btn-full" onclick="location.href='request-print.html'">立即询价</button>
+                <button class="btn btn-dark btn-full">查看详情</button>
+                <button class="btn btn-full">立即询价</button>
                 <button class="btn btn-full">收藏商家</button>
               </div>
             </div>
@@ -275,7 +275,7 @@
         <div class="empty">
           <div style="font-size:20px;font-weight:700;color:#334155;">没有找到完全匹配的商家？</div>
           <div style="margin-top:10px;">你可以放宽城市或材料条件，或者直接发布打印需求，让商家主动来报价。</div>
-          <div style="margin-top:18px;"><button class="btn btn-dark" onclick="location.href='request-print.html'">发布打印需求</button></div>
+          <div style="margin-top:18px;"><button class="btn btn-dark">发布打印需求</button></div>
         </div>
       </section>
     </div>

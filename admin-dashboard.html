@@ -82,7 +82,12 @@
       .row-card { grid-template-columns: 1fr; }
       .right-actions { min-width: auto; }
     }
-  </style>
+  
+footer{border-top:1px solid #e2e8f0;background:#fff}
+.footer-inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:22px 0 34px;color:#64748b;font-size:14px}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap}
+
+</style>
 </head>
 <body>
   <header class="header">
@@ -98,12 +103,9 @@
         <a href="index.html">首页</a>
         <a href="merchant-list.html">前台商家页</a>
         <a href="merchant-dashboard.html">商家后台</a>
-        <a href="brand-guidelines.html">品牌规范</a>
         <a href="login.html">登录页</a>
-        <a href="brand-guidelines.html">品牌规范</a>
       </nav>
       <div class="actions">
-        <button class="btn" onclick="location.href='brand-guidelines.html'">品牌规范</button>
         <button class="btn">系统设置</button>
         <button class="btn btn-dark">管理员</button>
       </div>
@@ -274,5 +276,17 @@
       </section>
     </div>
   </main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>© 2026 WriterBoom.</div>
+    <div class="footer-links">
+      <a href="platform-rules.html">平台规则</a>
+      <a href="privacy-policy.html">隐私政策</a>
+      <a href="terms-of-service.html">用户协议</a>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

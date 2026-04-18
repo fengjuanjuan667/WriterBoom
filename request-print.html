@@ -70,7 +70,12 @@
       h1 { font-size: 28px; }
       .actions { display: none; }
     }
-  </style>
+  
+footer{border-top:1px solid #e2e8f0;background:#fff}
+.footer-inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:22px 0 34px;color:#64748b;font-size:14px}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap}
+
+</style>
 </head>
 <body>
   <header class="header">
@@ -86,12 +91,10 @@
         <a href="#">首页</a>
         <a href="#">找商家</a>
         <a href="#">发布需求</a>
-        <a href="merchant-join.html">商家入驻</a>
-        <a href="brand-guidelines.html">品牌规范</a>
+        <a href="#">商家入驻</a>
       </nav>
       <div class="actions">
-        <button class="btn" onclick="location.href='brand-guidelines.html'">品牌规范</button>
-        <button class="btn" onclick="location.href='login.html'">登录</button>
+        <button class="btn">登录</button>
         <button class="btn btn-dark">注册</button>
       </div>
     </div>
@@ -217,5 +220,17 @@
       </aside>
     </div>
   </main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>© 2026 WriterBoom.</div>
+    <div class="footer-links">
+      <a href="platform-rules.html">平台规则</a>
+      <a href="privacy-policy.html">隐私政策</a>
+      <a href="terms-of-service.html">用户协议</a>
+    </div>
+  </div>
+</footer>
+
 </body>
 </html>

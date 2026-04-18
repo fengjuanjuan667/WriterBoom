@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WriterBoom - 3D打印共享平台</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: #ffffff;
+      color: #0f172a;
+      line-height: 1.5;
+    }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+    .header {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 20px; padding: 16px 0;
+    }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .logo {
+      width: 46px; height: 46px; border-radius: 18px;
+      background: linear-gradient(135deg, #0f172a, #334155);
+      color: #fff; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; letter-spacing: .5px;
+      box-shadow: 0 10px 24px rgba(15,23,42,.18);
+    }
+    .brand-title { font-size: 18px; font-weight: 800; }
+    .brand-sub { font-size: 12px; color: #64748b; }
+    .nav { display: flex; gap: 28px; color: #475569; font-size: 14px; }
+    .actions { display: flex; gap: 12px; }
+    .btn {
+      border: 1px solid #cbd5e1; background: white; color: #0f172a;
+      border-radius: 14px; padding: 10px 16px; font-size: 14px; cursor: pointer;
+      transition: .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-dark {
+      background: #0f172a; color: white; border-color: #0f172a;
+      box-shadow: 0 10px 22px rgba(15,23,42,.16);
+    }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(148,163,184,.18), transparent 28%),
+        radial-gradient(circle at 86% 24%, rgba(59,130,246,.10), transparent 24%),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 34px;
+      align-items: center;
+      padding: 72px 0 68px;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 9px 14px; border-radius: 999px; font-size: 13px;
+      border: 1px solid #dbeafe; color: #1d4ed8; background: #eff6ff;
+      margin-bottom: 18px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 58px;
+      line-height: 1.04;
+      letter-spacing: -1.4px;
+      max-width: 760px;
+    }
+    .hero p {
+      margin: 22px 0 0;
+      max-width: 620px;
+      color: #475569;
+      font-size: 18px;
+      line-height: 1.8;
+    }
+    .hero-actions {
+      display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px;
+    }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+      margin-top: 28px;
+      max-width: 760px;
+    }
+    .hero-stat {
+      background: rgba(255,255,255,.82);
+      border: 1px solid #e2e8f0;
+      border-radius: 22px;
+      padding: 16px 18px;
+      box-shadow: 0 12px 28px rgba(15,23,42,.05);
+    }
+    .hero-stat .label { font-size: 12px; color: #64748b; }
+    .hero-stat .value { font-size: 24px; font-weight: 800; margin-top: 8px; }
+    .panel {
+      position: relative;
+      border: 1px solid #e2e8f0;
+      border-radius: 32px;
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 18px 42px rgba(15,23,42,.08);
+      overflow: hidden;
+    }
+    .panel-top {
+      padding: 22px 22px 0;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .panel-top h3 { margin: 0; font-size: 22px; }
+    .chip {
+      padding: 7px 10px; border-radius: 999px; font-size: 12px;
+      background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0;
+    }
+    .panel-body { padding: 20px 22px 22px; }
+    .search-card {
+      border: 1px solid #e2e8f0; border-radius: 24px; padding: 18px; background: #f8fafc;
+    }
+    .field, select {
+      width: 100%; padding: 14px 16px; border-radius: 16px;
+      border: 1px solid #e2e8f0; background: white; font-size: 14px; color: #0f172a;
+    }
+    .field::placeholder { color: #94a3b8; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .search-card .stack { display: grid; gap: 12px; }
+    .mini-panel {
+      margin-top: 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: 24px;
+      background: white;
+      overflow: hidden;
+    }
+    .mini-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 16px; border-bottom: 1px solid #e2e8f0;
+      font-size: 14px;
+    }
+    .mini-list { display: grid; gap: 0; }
+    .mini-item {
+      display: grid; grid-template-columns: 1fr auto; gap: 12px;
+      padding: 14px 16px; border-bottom: 1px solid #f1f5f9;
+      font-size: 14px;
+    }
+    .mini-item:last-child { border-bottom: none; }
+    .section { padding: 72px 0; }
+    .light { background: #f8fafc; }
+    .section-head {
+      display: flex; justify-content: space-between; gap: 18px; align-items: end; margin-bottom: 24px;
+    }
+    .section-head h2 { margin: 0; font-size: 32px; }
+    .section-head p { margin: 8px 0 0; color: #64748b; }
+    .categories { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+    .category, .guarantee {
+      border: 1px solid #e2e8f0; border-radius: 28px; padding: 20px; background: white;
+      box-shadow: 0 8px 20px rgba(15,23,42,.03);
+    }
+    .title { font-weight: 700; margin-bottom: 8px; }
+    .small { font-size: 14px; color: #64748b; }
+    .makers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .maker {
+      border: 1px solid #e2e8f0; border-radius: 30px; padding: 22px; background: white;
+      box-shadow: 0 10px 28px rgba(15,23,42,.04);
+    }
+    .maker-top { display: flex; justify-content: space-between; gap: 12px; }
+    .maker-name { font-size: 20px; font-weight: 800; }
+    .maker-city { color: #64748b; margin-top: 4px; }
+    .tag {
+      background: #f1f5f9; color: #475569; border-radius: 999px; padding: 6px 10px; font-size: 12px;
+    }
+    .meta { display: grid; gap: 10px; margin-top: 18px; font-size: 14px; color: #475569; }
+    .meta-row { display: flex; justify-content: space-between; gap: 10px; }
+    .maker-actions { display: flex; gap: 10px; margin-top: 18px; }
+    .maker-actions .btn { flex: 1; }
+    .cases { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .case {
+      border: 1px solid #e2e8f0; border-radius: 28px; overflow: hidden; background: white;
+      box-shadow: 0 10px 24px rgba(15,23,42,.04);
+    }
+    .case-image {
+      height: 180px;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.4), transparent 20%),
+        linear-gradient(135deg, #cbd5e1, #f1f5f9);
+    }
+    .case-body { padding: 16px; }
+    .guarantees { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .join-box {
+      border-radius: 36px;
+      padding: 34px;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,.08), transparent 22%),
+        linear-gradient(135deg, #0f172a, #1e293b 60%, #334155 100%);
+      color: white;
+      display: grid; grid-template-columns: 1.06fr .94fr; gap: 28px;
+      box-shadow: 0 18px 38px rgba(15,23,42,.18);
+    }
+    .join-pill {
+      display: inline-flex; padding: 8px 12px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18); color: rgba(255,255,255,.86);
+      font-size: 13px; margin-bottom: 14px;
+    }
+    .join-box h2 {
+      margin: 0; font-size: 40px; line-height: 1.12; letter-spacing: -.8px;
+    }
+    .join-box p { color: rgba(255,255,255,.74); margin: 16px 0 0; line-height: 1.8; }
+    .join-form {
+      background: rgba(255,255,255,.96); color: #0f172a; border-radius: 28px;
+      padding: 22px; box-shadow: 0 12px 26px rgba(0,0,0,.12);
+    }
+    .join-form h3 { margin: 0 0 14px; font-size: 22px; }
+    footer {
+      border-top: 1px solid #e2e8f0;
+      background: white;
+    }
+    .footer-inner {
+      display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+      padding: 22px 0 36px; color: #64748b; font-size: 14px;
+    }
+    .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
+    @media (max-width: 1080px) {
+      .nav { display: none; }
+      .hero-inner, .join-box { grid-template-columns: 1fr; }
+      .categories, .makers, .cases, .guarantees { grid-template-columns: 1fr 1fr; }
+      h1 { font-size: 44px; }
+    }
+    @media (max-width: 720px) {
+      .actions { display: none; }
+      h1 { font-size: 34px; }
+      .hero-stats, .grid-2, .categories, .makers, .cases, .guarantees { grid-template-columns: 1fr; }
+      .section-head { align-items: start; flex-direction: column; }
+      .join-box h2 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="logo">WB</div>
+        <div>
+          <div class="brand-title">WriterBoom</div>
+          <div class="brand-sub">3D打印共享平台</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="index.html">首页</a>
+        <a href="merchant-list.html">找商家</a>
+        <a href="request-print.html">发布需求</a>
+        <a href="merchant-join.html">商家入驻</a>
+        <a href="brand-guidelines.html">品牌规范</a>
+      </nav>
+      <div class="actions">
+        <button class="btn" onclick="location.href='brand-guidelines.html'">品牌规范</button>
+        <button class="btn" onclick="location.href='login.html'">登录</button>
+        <button class="btn btn-dark" onclick="location.href='login.html'">注册</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <div class="pill">连接个人机主与打印需求的 3D 打印平台</div>
+        <h1>更轻松地找到 <span style="color:#475569;">靠谱的 3D 打印服务</span></h1>
+        <p>上传模型、筛选商家、确认材料与交期，让 3D 打印服务像下单本地服务一样简单。无论你是想打印手办、结构样件、教学模型还是功能零件，都能在 WriterBoom 快速找到更适合的服务商。</p>
+
+        <div class="hero-actions">
+          <button class="btn btn-dark" onclick="location.href='merchant-list.html'">立即找商家</button>
+          <button class="btn" onclick="location.href='request-print.html'">发布打印需求</button>
+          <button class="btn" onclick="location.href='brand-guidelines.html'">查看品牌规范</button>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="label">平台定位</div>
+            <div class="value">撮合交易</div>
+          </div>
+          <div class="hero-stat">
+            <div class="label">服务模式</div>
+            <div class="value">同城 / 异地</div>
+          </div>
+          <div class="hero-stat">
+            <div class="label">覆盖场景</div>
+            <div class="value">打样 / 模型 / 零件</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-top">
+          <h3>快速开始找商家</h3>
+          <span class="chip">WriterBoom 推荐</span>
+        </div>
+        <div class="panel-body">
+          <div class="search-card">
+            <div class="stack">
+              <input class="field" placeholder="输入城市、材料或需求关键词，例如：深圳 / 树脂 / 手办" />
+              <div class="grid-2">
+                <select>
+                  <option>选择打印类型</option>
+                  <option>FDM</option>
+                  <option>SLA</option>
+                  <option>SLS</option>
+                </select>
+                <select>
+                  <option>选择材料</option>
+                  <option>PLA</option>
+                  <option>ABS</option>
+                  <option>PETG</option>
+                  <option>Resin</option>
+                </select>
+              </div>
+              <button class="btn btn-dark" onclick="location.href='merchant-list.html'">搜索商家</button>
+            </div>
+          </div>
+
+          <div class="mini-panel">
+            <div class="mini-header">
+              <strong>推荐商家示例</strong>
+              <span class="small">更像正式产品的展示方式</span>
+            </div>
+            <div class="mini-list">
+              <div class="mini-item">
+                <div>
+                  <div><strong>Layer Lab</strong></div>
+                  <div class="small">深圳 · FDM / SLA · 工业样件友好</div>
+                </div>
+                <button class="btn" onclick="location.href='merchant-detail.html'">查看</button>
+              </div>
+              <div class="mini-item">
+                <div>
+                  <div><strong>Maker House</strong></div>
+                  <div class="small">上海 · SLA · 树脂手办友好</div>
+                </div>
+                <button class="btn" onclick="location.href='merchant-detail.html'">查看</button>
+              </div>
+              <div class="mini-item">
+                <div>
+                  <div><strong>Print Neighbor</strong></div>
+                  <div class="small">广州 · FDM · 功能件友好</div>
+                </div>
+                <button class="btn" onclick="location.href='merchant-detail.html'">查看</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

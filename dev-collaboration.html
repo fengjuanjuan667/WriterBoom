@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WriterBoom - 开发协作与技术实现建议</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#f8fafc;color:#0f172a;line-height:1.7}
+a{text-decoration:none;color:inherit}
+.container{max-width:1180px;margin:0 auto;padding:0 24px}
+.header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid #e2e8f0}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:20px}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{width:46px;height:46px;border-radius:18px;background:linear-gradient(135deg,#0f172a,#334155);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+.brand-title{font-size:18px;font-weight:800}.brand-sub{font-size:12px;color:#64748b}
+.nav{display:flex;gap:28px;color:#475569;font-size:14px}.actions{display:flex;gap:12px}
+.btn{border:1px solid #cbd5e1;background:#fff;color:#0f172a;border-radius:14px;padding:10px 16px;font-size:14px;cursor:pointer}
+.btn-dark{background:#0f172a;color:#fff;border-color:#0f172a}
+.hero{background:linear-gradient(180deg,#ffffff,#f8fafc);border-bottom:1px solid #e2e8f0}
+.hero-inner{padding:56px 0 42px}
+.crumbs{font-size:14px;color:#64748b;margin-bottom:12px}
+h1{margin:0;font-size:42px;line-height:1.1;letter-spacing:-1px}
+.sub{margin-top:12px;color:#64748b;max-width:860px}
+main{padding:32px 0 68px}
+.section{display:grid;gap:18px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:28px;padding:22px;box-shadow:0 10px 24px rgba(15,23,42,.04)}
+.card h2{margin:0 0 14px;font-size:24px}
+.card h3{margin:0 0 12px;font-size:20px}
+.small{font-size:14px;color:#64748b}
+.tag{display:inline-flex;padding:6px 10px;border-radius:999px;background:#f1f5f9;color:#475569;font-size:12px;border:1px solid #e2e8f0}
+.tag.green{background:#ecfdf5;color:#047857;border-color:#d1fae5}
+.tag.blue{background:#eff6ff;color:#1d4ed8;border-color:#dbeafe}
+.tag.orange{background:#fff7ed;color:#c2410c;border-color:#fed7aa}
+.notice{padding:14px 16px;border-radius:18px;background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe;font-size:14px}
+.list{display:grid;gap:12px}
+.item{border:1px solid #e2e8f0;border-radius:18px;padding:14px 16px;background:#fcfcfd}
+.item strong{display:block;margin-bottom:6px}
+.step{border-left:3px solid #0f172a;padding-left:14px;margin-top:12px}
+.footer{border-top:1px solid #e2e8f0;background:#fff}
+.footer-inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:22px 0 34px;color:#64748b;font-size:14px}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap}
+@media(max-width:980px){.nav{display:none}.grid-2,.grid-3{grid-template-columns:1fr}}
+@media(max-width:720px){.actions{display:none}h1{font-size:32px}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="container header-inner">
+    <div class="brand">
+      <div class="logo">WB</div>
+      <div>
+        <div class="brand-title">WriterBoom</div>
+        <div class="brand-sub">3D打印共享平台</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="index.html">首页</a>
+      <a href="merchant-list.html">找商家</a>
+      <a href="request-print.html">发布需求</a>
+      <a href="merchant-join.html">商家入驻</a>
+      <a href="brand-guidelines.html">品牌规范</a>
+    </nav>
+    <div class="actions">
+      <button class="btn" onclick="location.href='mvp-roadmap.html'">MVP 规划</button>
+      <button class="btn btn-dark" onclick="location.href='index.html'">返回首页</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="crumbs">首页 / 开发协作与技术实现建议</div>
+    <h1>开发协作页 / 技术实现建议</h1>
+    <div class="sub">这一页用于帮助你后续找开发、自己梳理开发流程，或者和外包、工程师沟通时更高效地说明：这个项目应该怎么落地、优先做什么、推荐用什么方式实现。</div>
+  </div>
+</section>
+
+<main>
+  <div class="container section">
+    <div class="card">
+      <h2>当前阶段的核心判断</h2>
+      <p><strong>WriterBoom 现在已经完成了比较完整的产品原型阶段，下一步不应该继续无限加静态页面，而是开始进入“真实功能实现阶段”。</strong></p>
+      <div class="notice" style="margin-top:14px;">
+        对外协作时最重要的不是把页面讲得多漂亮，而是讲清楚：哪些是真页面、哪些是真流程、哪些功能优先做。
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3>你已经有的</h3>
+        <p class="small">域名、整套页面原型、品牌规范、规则页、服务页、成功反馈页、项目介绍页和 MVP 规划页。</p>
+      </div>
+      <div class="card">
+        <h3>你真正缺的</h3>
+        <p class="small">表单提交、数据存储、登录体系、后台管理和真实流程联动，而不是更多展示页。</p>
+      </div>
+      <div class="card">
+        <h3>下一步重点</h3>
+        <p class="small">把“发布需求 → 商家审核 → 商家接单 → 状态流转”这条链路做成真实功能。</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h2>推荐的开发方式</h2>
+        <div class="list">
+          <div class="item">
+            <strong><span class="tag green">推荐</span> 前端 + 后端分开开发</strong>
+            前端负责页面与交互，后端负责登录、表单提交、文件上传、审核与订单数据。
+          </div>
+          <div class="item">
+            <strong><span class="tag green">推荐</span> 先 Web，再决定 App</strong>
+            你当前已经有网站原型，先把 Web 跑通，比一开始就做 App 成本更低、效率更高。
+          </div>
+          <div class="item">
+            <strong><span class="tag blue">建议</span> 先做管理后台</strong>
+            因为平台类产品离不开审核、查看数据、处理需求和订单管理。
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>不建议的做法</h2>
+        <div class="list">
+          <div class="item">
+            <strong><span class="tag orange">不建议</span> 一开始就做复杂 App</strong>
+            先做 Web MVP 更容易验证真实需求，也更方便调整。
+          </div>
+          <div class="item">
+            <strong><span class="tag orange">不建议</span> 一开始做太重的技术架构</strong>
+            例如复杂微服务、超多角色系统，这会让项目很难起步。
+          </div>
+          <div class="item">
+            <strong><span class="tag orange">不建议</span> 没有流程就直接找人开发</strong>
+            开发之前至少要先明确页面、功能优先级、字段结构和核心闭环。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>推荐的第一版技术实现范围</h2>
+      <div class="grid-3">
+        <div class="item">
+          <strong>用户端</strong>
+          注册登录、发布需求、查看需求状态、查看订单状态、评价商家。
+        </div>
+        <div class="item">
+          <strong>商家端</strong>
+          申请入驻、上传设备与案例、查看询价、报价、更新订单状态。
+        </div>
+        <div class="item">
+          <strong>平台后台</strong>
+          商家审核、需求管理、订单管理、基础内容管理、规则管理。
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h2>和开发沟通时要先准备什么</h2>
+        <div class="step"><strong>第 1 项：页面清单</strong><div class="small">哪些页面已经有了，哪些是必须开发的真实页面。</div></div>
+        <div class="step"><strong>第 2 项：字段清单</strong><div class="small">每个表单到底要收集什么字段，例如姓名、设备型号、材料、交期等。</div></div>
+        <div class="step"><strong>第 3 项：流程清单</strong><div class="small">谁提交、谁审核、谁看到、谁更新状态，这些都要明确。</div></div>
+        <div class="step"><strong>第 4 项：优先级清单</strong><div class="small">哪些必须做，哪些可以第二阶段再做。</div></div>
+      </div>
+
+      <div class="card">
+        <h2>如果你一个人推进项目</h2>
+        <p>你现在最好的方式不是自己硬学全部开发，而是先把产品结构、页面体系、功能优先级和字段逻辑梳理清楚。</p>
+        <p class="small">这样无论你后面找外包、找开发朋友、找联合创始人，还是以后自己再学技术，都会节省大量沟通成本。</p>
+        <div class="notice" style="margin-top:14px;">
+          你现在其实已经完成了最难的一半：把想法具体化成了一个完整的产品原型。
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>建议的下一步协作动作</h2>
+      <div class="list">
+        <div class="item">
+          <strong>1. 先整理一份“页面 + 功能 + 字段”总表</strong>
+          这是最适合交给开发的第一份材料。
+        </div>
+        <div class="item">
+          <strong>2. 再整理一份“优先级开发清单”</strong>
+          明确第一阶段只做最关键的真实功能闭环。
+        </div>
+        <div class="item">
+          <strong>3. 最后再决定找谁开发</strong>
+          可以是外包、兼职开发、技术合伙人，或者后续自己逐步接触无代码/低代码工具。
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>© 2026 WriterBoom.</div>
+    <div class="footer-links">
+      <a href="platform-rules.html">平台规则</a>
+      <a href="privacy-policy.html">隐私政策</a>
+      <a href="terms-of-service.html">用户协议</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

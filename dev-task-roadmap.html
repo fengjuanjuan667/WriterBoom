@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WriterBoom - 开发任务清单 / 第一阶段开发排期</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#f8fafc;color:#0f172a;line-height:1.7}
+a{text-decoration:none;color:inherit}
+.container{max-width:1240px;margin:0 auto;padding:0 24px}
+.header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid #e2e8f0}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:20px}
+.brand{display:flex;align-items:center;gap:14px}
+.logo{width:46px;height:46px;border-radius:18px;background:linear-gradient(135deg,#0f172a,#334155);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}
+.brand-title{font-size:18px;font-weight:800}.brand-sub{font-size:12px;color:#64748b}
+.nav{display:flex;gap:28px;color:#475569;font-size:14px}.actions{display:flex;gap:12px}
+.btn{border:1px solid #cbd5e1;background:#fff;color:#0f172a;border-radius:14px;padding:10px 16px;font-size:14px;cursor:pointer}
+.btn-dark{background:#0f172a;color:#fff;border-color:#0f172a}
+.hero{background:linear-gradient(180deg,#ffffff,#f8fafc);border-bottom:1px solid #e2e8f0}
+.hero-inner{padding:56px 0 42px}
+.crumbs{font-size:14px;color:#64748b;margin-bottom:12px}
+h1{margin:0;font-size:42px;line-height:1.1;letter-spacing:-1px}
+.sub{margin-top:12px;color:#64748b;max-width:900px}
+main{padding:32px 0 68px}
+.section{display:grid;gap:18px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:28px;padding:22px;box-shadow:0 10px 24px rgba(15,23,42,.04)}
+.card h2{margin:0 0 14px;font-size:24px}
+.card h3{margin:0 0 12px;font-size:20px}
+.small{font-size:14px;color:#64748b}
+.notice{padding:14px 16px;border-radius:18px;background:#eff6ff;color:#1e40af;border:1px solid #bfdbfe;font-size:14px}
+.tag{display:inline-flex;padding:6px 10px;border-radius:999px;background:#f1f5f9;color:#475569;font-size:12px;border:1px solid #e2e8f0}
+.tag.green{background:#ecfdf5;color:#047857;border-color:#d1fae5}
+.tag.blue{background:#eff6ff;color:#1d4ed8;border-color:#dbeafe}
+.tag.orange{background:#fff7ed;color:#c2410c;border-color:#fed7aa}
+.list{display:grid;gap:12px}
+.item{border:1px solid #e2e8f0;border-radius:18px;padding:14px 16px;background:#fcfcfd}
+.item strong{display:block;margin-bottom:6px}
+.table-wrap{overflow:auto;border:1px solid #e2e8f0;border-radius:22px}
+table{width:100%;border-collapse:collapse;background:#fff;min-width:980px}
+th,td{padding:14px;border-bottom:1px solid #e2e8f0;vertical-align:top;text-align:left;font-size:14px}
+th{background:#f8fafc;font-size:13px;color:#475569}
+tr:last-child td{border-bottom:none}
+.footer{border-top:1px solid #e2e8f0;background:#fff}
+.footer-inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:22px 0 34px;color:#64748b;font-size:14px}
+.footer-links{display:flex;gap:18px;flex-wrap:wrap}
+@media(max-width:980px){.nav{display:none}.grid-2,.grid-3{grid-template-columns:1fr}}
+@media(max-width:720px){.actions{display:none}h1{font-size:32px}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="container header-inner">
+    <div class="brand">
+      <div class="logo">WB</div>
+      <div>
+        <div class="brand-title">WriterBoom</div>
+        <div class="brand-sub">3D打印共享平台</div>
+      </div>
+    </div>
+    <nav class="nav">
+      <a href="index.html">首页</a>
+      <a href="project-hub.html">创业资料中心</a>
+      <a href="project-overview.html">项目介绍</a>
+      <a href="mvp-roadmap.html">MVP 规划</a>
+      <a href="dev-collaboration.html">开发协作</a>
+    </nav>
+    <div class="actions">
+      <button class="btn" onclick="location.href='page-function-fields.html'">字段总表</button>
+      <button class="btn btn-dark" onclick="location.href='index.html'">返回首页</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="crumbs">首页 / 开发任务清单</div>
+    <h1>开发任务清单 / 第一阶段开发排期</h1>
+    <div class="sub">这一页把第一阶段最该开发的功能拆成更可执行的任务清单，方便你和开发、外包或合作伙伴讨论：先做什么、后做什么、每块的目标是什么、哪些功能暂时不做。</div>
+  </div>
+</section>
+
+<main>
+  <div class="container section">
+    <div class="card">
+      <h2>第一阶段的总目标</h2>
+      <p><strong>先把“用户发布需求 → 商家入驻审核 → 商家查看需求 / 报价 → 平台查看状态”这条最小闭环做出来。</strong></p>
+      <div class="notice">不要一开始就做太多附加能力。第一阶段最重要的不是功能多，而是流程能跑通。</div>
+    </div>
+
+    <div class="grid-3">
+      <div class="card">
+        <h3>现在最重要</h3>
+        <p class="small">表单提交、数据保存、后台查看、状态管理。</p>
+      </div>
+      <div class="card">
+        <h3>可以晚一点做</h3>
+        <p class="small">聊天、通知、自动估价、复杂推荐系统。</p>
+      </div>
+      <div class="card">
+        <h3>暂时不要做</h3>
+        <p class="small">重社交、复杂企业系统、过多 AI 自动化。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>第一阶段开发排期建议</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>阶段</th>
+              <th>任务模块</th>
+              <th>要完成什么</th>
+              <th>交付结果</th>
+              <th>优先级</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>第 1 周</strong></td>
+              <td>账号基础</td>
+              <td>实现普通用户 / 商家注册登录、基础身份区分。</td>
+              <td>可以登录、可以区分用户与商家。</td>
+              <td><span class="tag green">必做</span></td>
+            </tr>
+            <tr>
+              <td><strong>第 1 周</strong></td>
+              <td>需求提交</td>
+              <td>把发布需求页接到真实提交逻辑，可保存需求表单和文件信息。</td>
+              <td>需求可提交、后台可查看。</td>
+              <td><span class="tag green">必做</span></td>
+            </tr>
+            <tr>
+              <td><strong>第 2 周</strong></td>
+              <td>商家入驻</td>
+              <td>把商家入驻页接到真实提交逻辑，可保存设备和案例资料。</td>
+              <td>入驻申请可提交、后台可审核。</td>
+              <td><span class="tag green">必做</span></td>
+            </tr>
+            <tr>
+              <td><strong>第 2 周</strong></td>
+              <td>管理后台基础</td>
+              <td>管理员可以查看商家申请、查看需求列表、改审核状态。</td>
+              <td>平台可以初步运营和审核。</td>
+              <td><span class="tag green">必做</span></td>
+            </tr>
+            <tr>
+              <td><strong>第 3 周</strong></td>
+              <td>商家后台基础</td>
+              <td>商家查看询价、查看需求、维护店铺资料。</td>
+              <td>商家可以真正参与流程。</td>
+              <td><span class="tag green">必做</span></td>
+            </tr>
+            <tr>
+              <td><strong>第 3 周</strong></td>
+              <td>用户中心基础</td>
+              <td>用户可以看到自己提交过的需求和状态。</td>
+              <td>用户能追踪自己的需求。</td>
+              <td><span class="tag green">必做</span></td>
+            </tr>
+            <tr>
+              <td><strong>第 4 周</strong></td>
+              <td>订单状态流转</td>
+              <td>实现“待处理 / 已报价 / 进行中 / 已完成”等基础状态。</td>
+              <td>最小订单闭环成立。</td>
+              <td><span class="tag blue">建议做</span></td>
+            </tr>
+            <tr>
+              <td><strong>第 4 周</strong></td>
+              <td>评价与基础信誉</td>
+              <td>订单完成后支持评分和评价展示。</td>
+              <td>平台开始沉淀信任与口碑。</td>
+              <td><span class="tag blue">建议做</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h2>第一阶段任务清单</h2>
+        <div class="list">
+          <div class="item">
+            <strong>任务 1：账号系统</strong>
+            登录、注册、身份区分、基础资料保存。
+          </div>
+          <div class="item">
+            <strong>任务 2：需求系统</strong>
+            发布需求、保存需求、状态查看。
+          </div>
+          <div class="item">
+            <strong>任务 3：商家系统</strong>
+            商家入驻、资料审核、商家后台查看。
+          </div>
+          <div class="item">
+            <strong>任务 4：后台审核系统</strong>
+            管理员可以处理商家申请和需求列表。
+          </div>
+          <div class="item">
+            <strong>任务 5：订单 / 状态系统</strong>
+            支持最基础的订单流转和状态更新。
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>第二阶段任务清单</h2>
+        <div class="list">
+          <div class="item">
+            <strong>任务 6：站内沟通</strong>
+            用户与商家围绕需求细节沟通。
+          </div>
+          <div class="item">
+            <strong>任务 7：通知机制</strong>
+            邮件 / 站内消息 / 状态提醒。
+          </div>
+          <div class="item">
+            <strong>任务 8：自动估价辅助</strong>
+            给商家和用户一个基础参考价格。
+          </div>
+          <div class="item">
+            <strong>任务 9：数据看板</strong>
+            商家和平台运营查看基础数据。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>开发沟通时的优先级说法</h2>
+      <p>你可以直接这样告诉开发：</p>
+      <div class="notice">“第一阶段我只想先做账号、发布需求、商家入驻、后台审核、用户中心、商家后台、基础订单状态，不需要聊天、不需要复杂推荐、不需要 App 同步上线。”</div>
+      <p style="margin-top:14px;">这句话会帮助开发更快理解你的真实范围，也更容易控制预算和工期。</p>
+    </div>
+
+    <div class="card">
+      <h2>你下一步最该做的事</h2>
+      <p>现在你已经有：</p>
+      <p class="small">项目介绍页、MVP 规划页、开发协作页、字段总表、开发任务清单页。</p>
+      <p>再往下，最适合做的就不是继续补网页，而是把这些页面整合成一个真正可以发给开发的交付包。</p>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>© 2026 WriterBoom.</div>
+    <div class="footer-links">
+      <a href="project-hub.html">创业资料中心</a>
+      <a href="platform-rules.html">平台规则</a>
+      <a href="privacy-policy.html">隐私政策</a>
+      <a href="terms-of-service.html">用户协议</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
